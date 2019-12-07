@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ClientProfileController!{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <a href={{ path('client_payments')}} class="btn btn-info">Jūsų mokėjimai</a><br>
+    <a href={{ path('client_computers')}} class="btn btn-info">Jūsų kompiuteriai</a><br>
+    <a href={{ path('client_contract')}} class="btn btn-info">Jūsų sutartis</a>
+</div>
+{% endblock %}

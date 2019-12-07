@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 align="center">Registracija</h1>
+    <div class="container" align="center">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email, {'label': 'El. paštas'}) }}
+        {{ form_row(registrationForm.plainPassword, {'label': 'Slaptažodis'}) }}
+
+        <button class="btn">Registruoti</button>
+    {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

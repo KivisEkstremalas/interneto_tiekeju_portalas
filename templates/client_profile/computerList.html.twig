@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-5">
+<a href={{ path('add_computer')}} class="btn btn-primary">Pridėti kompiuterį</a>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Serijinis numeris</th>
+                <th scope="col">Gamintojas</th>
+                <th scope="col">Modelis</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for computer in computers %}
+                <tr>
+                <td> {{ computer.serialno }} </td>
+                <td> {{ computer.manufacturer }} </td>
+                <td> {{ computer.model }}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

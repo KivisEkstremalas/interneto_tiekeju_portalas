@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-5">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Tiekėjas</th>
+                <th scope="col">Suma</th>
+                <th scope="col">Data</th>
+                <th scope="col">Sumokėta</th>
+                <th scope="col">Apmokėti</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+                <tr>
+                <td> {{ payment.provider.name }} </td>
+                <td> {{ payment.amount }} €</td>
+                <td> {{ payment.date|date("Y/m/d")}}
+                <td> {{ payment.paid ? 'Taip' : 'Ne' }} </td>
+                {% if payment.paid == 0 %}
+                    <td> <a href={{ path('client_complete_payment', {'id': payment.id}) }} class="btn btn-info">Apmokėti</a> </td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href={{ path('add_credit', {'id': app.user.id }) }} class="btn btn-info">Papildyti sąskaitą</a>
+    <h2>Visa mokėjimų suma : {{ total }} €</h2>
+    <h2>Jūsų sąskaitoje yra : {{ totalCredit }} €</h2>
+</div>
+{% endblock %}

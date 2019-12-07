@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% if role == 'ROLE_ADMIN' %}
+            <a href={{ path('editToClient', { 'id':id }) }} class="btn btn-info" style="width:200px">Keisti rolę į klientą</a><br>
+            <a href={{ path('editToProvider', { 'id':id })}} class="btn btn-info" style="width:200px">Keisti rolę į tiekėją</a><br>
+            {% elseif role == 'ROLE_PROVIDER' %}
+                <a href={{ path('editToClient', { 'id':id }) }} class="btn btn-info" style="width:200px">Keisti rolę į klientą</a><br>
+                <a href={{ path('editToAdmin', { 'id':id })}} class="btn btn-info" style="width:200px">Keisti rolę į administratorių</a><br>
+            {% else %}
+                <a href={{ path('editToProvider', { 'id':id })}} class="btn btn-info" style="width:200px">Keisti rolę į tiekėją</a><br>
+                <a href={{ path('editToAdmin', { 'id':id })}} class="btn btn-info" style="width:200px">Keisti rolę į administratorių</a><br>
+        {% endif %}
+    </div>
+{% endblock %}

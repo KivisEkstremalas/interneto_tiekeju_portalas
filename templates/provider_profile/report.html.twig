@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <table class="table">
+            <caption style="text-align: center">Išlaidos</caption>
+            <thead>
+            <tr>
+                <th scope="col">Pirkinys</th>
+                <th scope="col">Data</th>
+                <th scope="col">Suma</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for purchase in purchases %}
+                <tr>
+                    <td> {{ purchase.purchase }}</td>
+                    <td> {{ purchase.date|date("Y/m/d") }}</td>
+                    <td> {{ purchase.amount }} €</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <h8>Viso išleista: {{ totalPurchases }} €</h8>
+        <table class="table">
+            <caption style="text-align: center">Pajamos</caption>
+            <thead>
+            <tr>
+                <th scope="col">Klientas</th>
+                <th scope="col">Suma</th>
+                <th scope="col">Data</th>
+                <th scope="col">Sumokėta</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for payment in payments %}
+                <tr>
+                    <td> {{ payment.client.name }} {{ payment.client.surname }} </td>
+                    <td> {{ payment.amount }} €</td>
+                    <td> {{ payment.date|date("Y/m/d")}}
+                    <td> {{ payment.paid ? 'Taip' : 'Ne' }} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <h8 style="text-align: center">Viso gauta pajamų: {{ totalPayments }} €</h8><br>
+        {% if difference < 0 %}
+            <h8>Nuostolis: {{ -(difference) }} €</h8>
+            {% else %}
+            <h8>Pelnas: {{ difference }}</h8>
+        {% endif %}
+    </div>
+{% endblock %}

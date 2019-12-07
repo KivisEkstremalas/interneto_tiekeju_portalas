@@ -1,0 +1,63 @@
+{% extends('base.html.twig') %}
+
+{% block body %}
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h2>Interneto tiekėjų portalas</h2>
+    <h2>Rokas Rainys</h2>
+</div>
+    {% if app.user %}
+    {% if app.user.active == false %}
+        <div class="modal show" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" style="display: block;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Sąlygos</h5>
+                    </div>
+                    <div class="modal-body">
+                        ASMENS DUOMENŲ TVARKYMO TIKSLAI<br>
+                        <br>
+                        1.1    Mes renkame Jūsų asmens duomenis tik nurodytais, aiškiais ir teisėtais tikslais ir netvarkome Jūsų asmens duomenų jokiais būdais, kurie būtų nesuderinami su šiais tikslais.<br>
+                        <br>
+                        1.2    Siekdami suteikti jums prieigą prie šios interneto svetainės ir norėdami suteikti jums galimybę naudotis šia interneto svetaine, tvarkome šiuos asmens duomenis:<br>
+                        1.2.1     registracijos duomenys<br>
+                        <br>
+                        1.3    Pardavimų vykdymo ir pagalbos užklausų tvarkymo tikslais tvarkome šiuos asmens duomenis:<br>
+                        1.3.1    išlaidų duomenys<br>
+                        1.3.2    pajamų duomenys<br>
+                        <br>
+                        1.4    Jūsų asmens duomenų tvarkymas jūsų prašymų ir užklausų tvarkymo tikslais:<br>
+                        <br>
+                        1.5    siekdami teikti Jums kokybiškas paslaugas ir visapusišką aptarnavimą, šios Privatumo politikos nurodytus Jūsų asmens duomenis taip pat tvarkome jūsų užklausų ir prašymų vykdymo tikslais.<br>
+                        <br>
+                        1.6    Siekdami teikti Jums bendrus pasiūlymus ir specialiai jums pritaikytus pasiūlymus, mes tvarkome šiuos asmens duomenis:<br>
+                        1.6.1  suasmeninti rinkodaros duomenys.<br>
+                        <br>
+                        Šiame punkte nurodyti asmens duomenys yra tvarkomi tik Jūsų sutikimo pagrindu.<br>
+                        <br>
+                        Jūs turite teisę bet kuriuo metu atšaukti savo sutikimą susisiekdami su mumis raštu el. paštu rokas.rainys@ktu.edu.<br>
+                    </div>
+                    <div class="modal-footer">
+                        <a href={{ path('set_active', { 'id':app.user.id })}} class="btn btn-primary">Sutinku su sąlygomis</a><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% endif %}
+{% endblock %}

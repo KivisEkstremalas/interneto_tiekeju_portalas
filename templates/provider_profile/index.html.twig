@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-5">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h2>Sveiki {{ app.user.getProvider().name }}</h2><br>
+<a href={{ path('provider_clients')}} class="btn btn-info">Jūsų klientai</a><br>
+<a href={{ path('provider_purchases')}} class="btn btn-info">Jūsų pirkimai</a><br>
+<a href={{ path('provider_payments')}} class="btn btn-info">Klientų mokėjimai</a>
+    {{ form(form, action ="{{ path(provider_profile }}") }}
+</div>
+{% endblock %}

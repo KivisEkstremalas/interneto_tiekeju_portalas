@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">El. paštas</th>
+                <th scope="col">Rolė</th>
+                <th scope="col">Redaguoti</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td> {{ user.email }} </td>
+                    {% if user.role == 'ROLE_ADMIN' %}
+                    <td> Administratorius </td>
+                        {% elseif user.role == 'ROLE_PROVIDER' %}
+                            <td> Tiekėjas </td>
+                            {% else %}
+                                <td> Klientas </td>
+                                {% endif %}
+                    {% if user.role ==  'ROLE_CLIENT'%}
+                        <td><a href={{ path('editUser', {'id': user.id} ) }} class="btn btn-info" > Keisti rolę </a>
+                            <a href={{ path('change_provider', {'id': user.id}) }} class="btn btn-info" > Keisti tiekėją </a></td>
+                        {% else %}
+                    <td><a href={{ path('editUser', {'id': user.id} ) }} class="btn btn-info" > Keisti rolę </a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

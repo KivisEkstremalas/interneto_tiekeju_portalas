@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-5">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Klientas</th>
+                <th scope="col">Suma</th>
+                <th scope="col">Data</th>
+                <th scope="col">Sumokėta</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+                <tr>
+                <td> {{ payment.client.name }} {{ payment.client.surname }} </td>
+                <td> {{ payment.amount }} €</td>
+                <td> {{ payment.date|date("Y/m/d")}}
+                <td> {{ payment.paid ? 'Taip' : 'Ne' }} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Visa gautų mokėjimų suma : {{ total }} €</h3>
+</div>
+{% endblock %}

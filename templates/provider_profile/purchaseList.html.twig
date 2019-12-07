@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-5">
+<a href={{ path('add_purchase')}} class="btn btn-primary">Naujas pirkimas</a>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Pirkimo ID</th>
+                <th scope="col">Pirkimas</th>
+                <th scope="col">Data</th>
+                <th scope="col">Suma</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for purchase in purchases %}
+                <tr>
+                    <td> {{ purchase.id }}</td>
+                    <td> {{ purchase.purchase }}</td>
+                    <td> {{ purchase.date|date("Y/m/d") }}</td>
+                    <td> {{ purchase.amount }} €</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Visa pirkimų suma : {{ total }} €</h2>
+</div>
+{% endblock %}

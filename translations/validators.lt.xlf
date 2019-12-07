@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="email_with_@">
+                <source>Please include an '@' in the email address</source>
+                <target>J'aime Symfony</target>
+            </trans-unit>
+            <trans-unit id="please_fill_out_this_field">
+                <source>Please fill out this field.</source>
+                <target>Užpildykite šį lauką</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

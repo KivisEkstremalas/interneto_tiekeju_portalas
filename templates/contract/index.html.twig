@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pridėti sutartį{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="container mt-5" style="margin-left: 20px;">
+        {{ form(form, action="{{ path('add_contract') }}") }}
+    </div>
+{% endblock %}

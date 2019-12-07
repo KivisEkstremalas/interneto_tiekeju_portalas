@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-5">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Kliento ID</th>
+                <th scope="col">Vardas</th>
+                <th scope="col">Pavardė</th>
+                <th scope="col">Naujas mokėjimas</th>
+                <th scope="col">Sutartis</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td> {{ client.id }}</td>
+                    <td> {{ client.name }}</td>
+                    <td> {{ client.surname }}</td>
+                    <td><a href={{ path('add_payment', {'clientID': client.id}) }} class="btn btn-info">Pridėti mokėjimą</a></td>
+                    {% if client.contractName == null %}
+                        <td><a href={{ path('contract', {'id': client.id}) }} class="btn btn-info">Įkelti sutartį</a></td>
+                        {% else %}
+                            <td><a href={{ asset('uploads/contracts/' ~ client.contractName) }} class="btn btn-info">Peržiūrėti sutartį</a>
+                            <a href={{ path('delete_contract', { 'id':client.id })}} class="btn btn-danger">Ištrinti sutartį</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

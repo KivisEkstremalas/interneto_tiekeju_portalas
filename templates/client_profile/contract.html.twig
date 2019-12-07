@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ClientProfileController!{% endblock %}
+
+{% block body %}
+    <div class="container" style="horiz-align: center; margin-top: 50px;">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% if client.contractName != null %}
+        <a href={{ asset('uploads/contracts/' ~ client.contractName) }} class="btn btn-info">Peržiūrėti sutartį</a>
+        {% if client.contractSigned == false %}
+            <a href={{ path('sign_contract') }} class="btn btn-info">Įkelti pasirašytą sutartį</a>
+            {% endif %}
+        {% else %}
+        <h3>Jūsų tiekėjas dar neparuošė jums sutarties</h3>
+    {% endif %}
+    </div>
+{% endblock %}
